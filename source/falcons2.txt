@@ -1,0 +1,13 @@
+Falcon X Status
+Hardware
+fuel : 92%
+Engines : ok
+Trajectory : ok
+Navigation Control : ok
+
+Software
+Main Controller : ok
+fuel Controller : ok
+Engines Controller : ok
+Trajectory : ok
+Navigation Controller : ok
