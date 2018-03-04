@@ -1,4 +1,4 @@
-package Falcon;
+
 
 import java.util.*;
 import java.io.BufferedReader;
@@ -8,8 +8,11 @@ import java.io.IOException;
 import static java.lang.Double.parseDouble;
 
 public class Falcon {
-    /* ------- path of text file -------- */
-    private static final String FILENAME = "D:\\Falcon\\Falcon\\bin\\Falcon\\falcons1.txt";
+    /* ------- path of Weather file -------- */
+    private static final String WeatherFile = "C:\\Users\\RebirthX\\Downloads\\SF312_Project-master\\source\\falcons2.txt";
+    
+    /* ------- path of PreLaunch file -------- */
+    private static final String PreLaunchFile = "C:\\Users\\RebirthX\\Downloads\\SF312_Project-master\\source\\falcons2.txt";
 
     /* ------- color of text ---------- */
     public static final String ANSI_RED = "\u001B[31m";
@@ -25,7 +28,7 @@ public class Falcon {
         Timer timer1 = new Timer("My Timer1", false);
         Timer timer2 = new Timer("My Timer2", false);
         int count = 60; //60 seconds
-        int countTimeReadFile = 2; //30 seconds
+        int countTimeReadFile = 30; //30 seconds
         int i;
         Falcon readFile = new Falcon();
         String yes = "yes";
@@ -55,7 +58,8 @@ public class Falcon {
         timer1.cancel();
 
         //Read File (show file 30 seconds)
-        readFile.showReadFile();
+        readFile.showReadFile(WeatherFile);
+        readFile.showReadFile(PreLaunchFile);
         if(readFile.containNot == true){
             System.exit(0);
         }
@@ -64,8 +68,9 @@ public class Falcon {
         }
         
         //Shooting angle
+        Scanner angle = new Scanner(System.in);
         System.out.print("Shooting angle: ");
-        String angle = Sc.nextLine();
+        double shoot = angle.nextDouble();
 
         //Coordinate in latitude and longtitude
         System.out.print("Coordinate (x,y) : ");
@@ -191,12 +196,12 @@ public class Falcon {
     }
 
     // Read File Method
-    public void showReadFile(){
+    public void showReadFile(String fileName){
         BufferedReader br = null;
         FileReader fr = null;
 
         try {
-            fr = new FileReader(FILENAME);
+            fr = new FileReader(fileName);
             br = new BufferedReader(fr);
             String sCurrentLine;
             System.out.println("-------------- Prelaunch Checks --------------");
@@ -241,7 +246,7 @@ class MyTimerTask extends TimerTask {
     @Override
     public void run() {
         count--;
-       // System.out.println(count);
+      // System.out.println(count);
         if (count == 0) {
             System.out.println("End");
             cancel();
