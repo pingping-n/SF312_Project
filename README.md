@@ -14,4 +14,4 @@ Simulator control Falcon 9 by Space X
 - แก้บัคส่วนอื่นๆ
 
 ### ver 1.0 (beta)
- :)
+- :)
