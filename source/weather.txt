@@ -1,0 +1,5 @@
+weather : Mostly Clear
+pressure : 1009 hPa
+temperature (Celcius) : 28
+wind : ssw 18 km/hr
+visibility : 9.7 km
