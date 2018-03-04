@@ -14,27 +14,19 @@ public class Falcon {
     /* ------- color of text ---------- */
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_RESET = "\u001B[0m";
 
     private static TimerTask myTask1 = null;
     private static TimerTask myTask2 = null;
-    static Thread thread1 = new Thread();
-    static Thread thread2 = new Thread();
-    static Thread thread3 = new Thread();
-    static Thread thread4 = new Thread();
-    static Thread thread5 = new Thread();
-    static Thread thread6 = new Thread();
-    static Thread thread7 = new Thread();
+    static Thread thread = new Thread();
     boolean containNot = false;
-
 
     public static void main(String[] args) throws InterruptedException {
         Timer timer1 = new Timer("My Timer1", false);
         Timer timer2 = new Timer("My Timer2", false);
         int count = 60; //60 seconds
         int countTimeReadFile = 2; //30 seconds
-        int i,j,k,l,m,n,o;
+        int i;
         Falcon readFile = new Falcon();
         String yes = "yes";
         String no = "no";
@@ -50,7 +42,6 @@ public class Falcon {
                 System.exit(0);
             }
         });
-
 
         //Start
         Scanner Sc = new Scanner(System.in);
@@ -69,8 +60,27 @@ public class Falcon {
             System.exit(0);
         }
         for (i = countTimeReadFile - 1; i > 0; i--) {
-            thread1.sleep(1000);
+            thread.sleep(1000);
         }
+        
+        //Shooting angle
+        System.out.print("Shooting angle: ");
+        String angle = Sc.nextLine();
+
+        //Coordinate in latitude and longtitude
+        System.out.print("Coordinate (x,y) : ");
+        String co = Sc.nextLine();
+        co = co.replaceAll("[\\s|\\u00A0]+", "");
+        int split = co.indexOf(",");
+
+        double latitude = Double.parseDouble(co.substring(1,split));
+        double longtitude = Double.parseDouble(co.substring(split+1,co.length()-1));
+
+        if((latitude < -90 || latitude > 90) || (longtitude < -180 || longtitude > 180)) {
+            System.out.println("Invalid Coordinate");
+            System.exit(0);
+        }
+
         if (i == 0) {
             System.out.print("Start (Yes or No) : ");
             timer2.scheduleAtFixedRate(myTask2, delay, delay);
@@ -83,96 +93,79 @@ public class Falcon {
             if (choose.toLowerCase().equals(yes)) {
                 //Water Injection (10 seconds)
                 System.out.print("Water Injection: ");
-              
-                for(j = 10 ; j > 0 ; j--){
-                    thread2.sleep(1000);
-                    if(j > 3) {
-                    	System.out.print(j + " ");
+
+                for(i = 10 ; i > 0 ; i--){
+                    thread.sleep(1000);
+                    if(i > 3) {
+                        System.out.print(i + " ");
                     }
                     //Engine Controller: ignition sequence (start)
-                    if(j==3){
-                    	System.out.println();
-                    	System.out.print("Engine Controller:Tgnition sequence");
+                    if(i==3){
+                        System.out.println();
+                        System.out.print("Engine Controller: Ignition sequence");
                     }
                 }
                 //Launch: Nine Merlin Engines (start)
-                if(j==0){
-                	System.out.println();
-                	System.out.print("Launch:Nine merlin");
-                }
+                System.out.println();
+                System.out.print("Launch:Nine merlin");
 
                 System.out.println();
                 System.out.print("Pressure: ");
                 //Pressure 0 - 100% in 1 minutes
-                for(k = 0 ; k <= 100 ; k++){
-                    thread3.sleep(600);
-                    System.out.print(k+"% ");
+                for(i = 0 ; i <= 100 ; i++){
+                    thread.sleep(600);
+                    System.out.print(i+"% ");
                 }
                 //Maximum Dynamic Pressure (start)
-                if(k==100){
-                	System.out.println();
-                	System.out.println("Maximum Dynamic Pressure!!");
-                }
-                
-                //First Stage            
+                System.out.println();
+                System.out.println("Maximum Dynamic Pressure!!");
+
+                //First Stage
                 System.out.println();
                 System.out.println("First Stage: Main Engine Cutted off");
-                for(l = 3 ; l > 0 ; l--){
-                    thread4.sleep(1000);
+                for(i = 3 ; i > 0 ; i--){
+                    thread.sleep(1000);
                 }
 
-                
+                //Start Second Engine
                 System.out.println("Start Engine Second Stage");
                 System.out.print("Pressure: ");
                 //Pressure 0 - 100% in 1 minutes
-                for(k = 0 ; k <= 100 ; k++){
-                    thread3.sleep(600);
-                    System.out.print(k+"% ");
+                for(i = 0 ; i <= 100 ; i++){
+                    thread.sleep(600);
+                    System.out.print(i+"% ");
                 }
-                
+
                 System.out.println();
                 System.out.println("Main Engine Cutted off");
-                for(l = 2; l > 0 ; l--) {
-                	thread4.sleep(1000);
+                for(i = 2; i > 0 ; i--) {
+                    thread.sleep(1000);
                 }
                 System.out.println("Drgon Deployment");
-                for(l = 3; l > 0 ; l--) {
-                	thread4.sleep(1000);
+                for(i = 3; i > 0 ; i--) {
+                    thread.sleep(1000);
                 }
                 System.out.println("Done!!!");
-                
+
                 //Payload Fairing
                 System.out.println("Payload Fairing");
-                
+
                 System.out.println();
-                //Coordinate in latitude and longtitude
-                System.out.print("Coordinate (x,y) : ");
-                String co = Sc.nextLine();
-                co = co.replaceAll("[\\s|\\u00A0]+", "");
-                int split = co.indexOf(",");
-
-                double latitude = Double.parseDouble(co.substring(1,split));
-                double longtitude = Double.parseDouble(co.substring(split+1,co.length()-1));
-
-                if((latitude < -90 || latitude > 90) || (longtitude < -180 || longtitude > 180)) {
-                    System.out.println("Invalid Coordinate");
-                    System.exit(0);
-                }
 
                 //Flip: Cold Gas Thruster
                 System.out.println();
                 System.out.print("Flip: ");
-                for(m = 3 ; m > 0 ; m--){
-                    thread5.sleep(1000);
-                    System.out.println("Cold Gas Thruster " + m + "s ");
+                for(i = 3 ; i > 0 ; i--){
+                    thread.sleep(1000);
+                    System.out.println("Cold Gas Thruster " + i + "s ");
                 }
 
                 //BoostBack Burn
                 System.out.println();
                 System.out.print("BoostBack Burn: ");
-                for(n = 5 ; n > 0 ; n--){
-                    thread6.sleep(1000);
-                    System.out.print(n + "s ");
+                for(i = 5 ; i > 0 ; i--){
+                    thread.sleep(1000);
+                    System.out.print(i + "s ");
                 }
 
                 //Entry Burn with Expand Grid Fins
@@ -181,9 +174,9 @@ public class Falcon {
 
                 //Landing Burn
                 System.out.print("Landing Burn: ");
-                for(o = 3; o > 0; o--){
-                    thread7.sleep(1000);
-                    System.out.print(o + "s ");
+                for(i = 3; i > 0; i--){
+                    thread.sleep(1000);
+                    System.out.print(i + "s ");
                 }
 
                 //Done !!!
@@ -194,8 +187,6 @@ public class Falcon {
             } else if (choose.toLowerCase().equals(no)) {
                 System.out.print("End of program");
             }
-
-
         }
     }
 
@@ -231,7 +222,6 @@ public class Falcon {
             try {
                 if (br != null)
                     br.close();
-
                 if (fr != null)
                     fr.close();
             } catch (IOException ex) {
@@ -248,17 +238,14 @@ class MyTimerTask extends TimerTask {
         this.count = count;
         this.doWhenDone = doWhenDone;
     }
-
     @Override
     public void run() {
         count--;
-
        // System.out.println(count);
         if (count == 0) {
             System.out.println("End");
             cancel();
             doWhenDone.run();
-
         }
     }
 }
