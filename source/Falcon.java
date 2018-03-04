@@ -26,7 +26,7 @@ public class Falcon {
         Timer timer1 = new Timer("My Timer1", false);
         Timer timer2 = new Timer("My Timer2", false);
         int count = 60; //60 seconds
-        int countTimeReadFile = 20; //30 seconds
+        int countTimeReadFile = 30; //30 seconds
         int i;
         Falcon readFile = new Falcon();
         String yes = "yes";
@@ -53,6 +53,7 @@ public class Falcon {
 
         String start = Sc.nextLine();
         while(!(start.toLowerCase().equals(passwordCodeStart))){
+            System.out.println("Incorrect password Please try again");
             System.out.print("Code Start : ");
             start = Sc.nextLine();
         }
@@ -210,8 +211,10 @@ public class Falcon {
             fr = new FileReader(fileName);
             br = new BufferedReader(fr);
             String sCurrentLine;
+            System.out.println();
+            if(round == 1) { System.out.println("------------ Weather Checks ------------"); }
+            else if(round == 2) { System.out.println("------------ Prelaunch Checks ------------"); }
             while ((sCurrentLine = br.readLine()) != null) {
-                
                 //If weather is clear
                 if(sCurrentLine.contains("Clear") || sCurrentLine.contains("clear")){
                     containClear = true;
@@ -229,6 +232,7 @@ public class Falcon {
                     System.out.println(sCurrentLine);
                 }
             }
+            System.out.println("------------------------------------");
 
         } catch (IOException e) {
             e.printStackTrace();
